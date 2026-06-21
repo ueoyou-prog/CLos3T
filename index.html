@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muse Closet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <main class="app-shell">
+    <section id="authPage" class="page auth-page">
+      <div class="brand-card glass">
+        <p class="eyebrow">Weather · Mood · Wardrobe</p>
+        <h1>Muse Closet</h1>
+        <p class="brand-copy">오늘 공기와 네 취향에 맞춰 옷장을 조용히 정리해주는 핀터레스트 무드 스타일 보드.</p>
+      </div>
+
+      <form id="authForm" class="panel glass">
+        <div class="panel-head">
+          <p class="eyebrow">Start</p>
+          <h2>회원가입 / 로그인</h2>
+        </div>
+
+        <label>아이디
+          <input id="userId" type="text" placeholder="4자 이상" autocomplete="username" required />
+        </label>
+        <label>비밀번호
+          <input id="password" type="password" placeholder="8자 이상 + 특수문자" autocomplete="current-password" required />
+        </label>
+
+        <div class="form-grid">
+          <label>성별
+            <select id="gender" required>
+              <option value="">선택</option>
+              <option>남성</option>
+              <option>여성</option>
+              <option>선택 안 함</option>
+            </select>
+          </label>
+          <label>체형
+            <select id="bodyType" required>
+              <option value="">선택</option>
+              <option>슬림</option>
+              <option>보통</option>
+              <option>근육형</option>
+              <option>오버핏 선호</option>
+            </select>
+          </label>
+          <label>키 cm
+            <input id="height" type="number" min="120" max="230" placeholder="180" required />
+          </label>
+          <label>몸무게 kg
+            <input id="weight" type="number" min="30" max="180" placeholder="70" required />
+          </label>
+        </div>
+
+        <fieldset>
+          <legend>선호 스타일 태그</legend>
+          <div class="chips" id="styleChips">
+            <label><input type="checkbox" value="미니멀">미니멀</label>
+            <label><input type="checkbox" value="스트릿">스트릿</label>
+            <label><input type="checkbox" value="빈티지">빈티지</label>
+            <label><input type="checkbox" value="캐주얼">캐주얼</label>
+            <label><input type="checkbox" value="클래식">클래식</label>
+            <label><input type="checkbox" value="시티보이">시티보이</label>
+          </div>
+        </fieldset>
+
+        <p id="authError" class="error"></p>
+        <button class="primary" type="submit">내 옷장 열기</button>
+      </form>
+    </section>
+
+    <section id="mainPage" class="page hidden">
+      <header class="topbar glass">
+        <div>
+          <p class="eyebrow">Muse Closet</p>
+          <h2 id="helloText">오늘의 옷장</h2>
+        </div>
+        <div class="top-actions">
+          <button id="refreshWeather" class="ghost">날씨 새로고침</button>
+          <button id="logoutBtn" class="ghost">로그아웃</button>
+        </div>
+      </header>
+
+      <section class="hero-grid">
+        <article class="weather-card glass">
+          <p class="eyebrow">Today</p>
+          <h3 id="weatherTitle">날씨 불러오는 중</h3>
+          <p id="weatherDesc">위치 권한을 허용하면 현재 기온 기준으로 추천해요.</p>
+        </article>
+        <article class="recommend-card glass">
+          <div class="panel-head inline">
+            <div>
+              <p class="eyebrow">Daily Sets</p>
+              <h3>오늘의 무드 3가지</h3>
+            </div>
+            <button id="recommendBtn" class="primary small">추천 생성</button>
+          </div>
+          <div id="recommendations" class="recommendations empty">옷을 상의/하의 중심으로 등록하면 코디가 생성돼요.</div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <form id="closetForm" class="panel glass closet-form">
+          <div class="panel-head">
+            <p class="eyebrow">Upload</p>
+            <h3>디지털 옷장 등록</h3>
+          </div>
+          <label class="upload-box">
+            <input id="imageInput" type="file" accept="image/*" required />
+            <span>이미지 선택</span>
+            <img id="preview" alt="preview" />
+          </label>
+          <div class="form-grid">
+            <label>카테고리
+              <select id="category" required>
+                <option value="상의">상의</option>
+                <option value="하의">하의</option>
+                <option value="아우터">아우터</option>
+                <option value="신발">신발</option>
+              </select>
+            </label>
+            <label>색상
+              <select id="color" required>
+                <option>블랙</option><option>화이트</option><option>그레이</option><option>네이비</option>
+                <option>베이지</option><option>브라운</option><option>블루</option><option>레드</option>
+                <option>그린</option><option>카키</option><option>핑크</option>
+              </select>
+            </label>
+            <label>두께감
+              <select id="thickness" required>
+                <option>얇음</option><option>보통</option><option>두꺼움</option>
+              </select>
+            </label>
+            <label>계절
+              <select id="season" required>
+                <option>봄</option><option>여름</option><option>가을</option><option>겨울</option><option>사계절</option>
+              </select>
+            </label>
+          </div>
+          <fieldset>
+            <legend>스타일 태그</legend>
+            <div class="chips" id="itemStyleChips">
+              <label><input type="checkbox" value="미니멀">미니멀</label>
+              <label><input type="checkbox" value="스트릿">스트릿</label>
+              <label><input type="checkbox" value="빈티지">빈티지</label>
+              <label><input type="checkbox" value="캐주얼">캐주얼</label>
+              <label><input type="checkbox" value="클래식">클래식</label>
+              <label><input type="checkbox" value="시티보이">시티보이</label>
+            </div>
+          </fieldset>
+          <p class="hint">누끼 제거는 GitHub Pages 버전에서는 데모 처리예요. 실제 서버에선 rembg API 연결 위치가 app.js에 표시돼 있어요.</p>
+          <button class="primary" type="submit">옷 등록하기</button>
+        </form>
+
+        <section class="panel glass closet-panel">
+          <div class="panel-head inline">
+            <div>
+              <p class="eyebrow">My Closet</p>
+              <h3>등록된 옷</h3>
+            </div>
+            <select id="filterCategory">
+              <option value="전체">전체</option>
+              <option value="상의">상의</option>
+              <option value="하의">하의</option>
+              <option value="아우터">아우터</option>
+              <option value="신발">신발</option>
+            </select>
+          </div>
+          <div id="closetGrid" class="closet-grid empty">아직 등록된 옷이 없어요.</div>
+        </section>
+      </section>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
